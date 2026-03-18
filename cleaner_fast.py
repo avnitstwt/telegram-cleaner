@@ -2,8 +2,9 @@ import asyncio
 from telethon import TelegramClient
 
 # 🔑 YOUR DETAILS
-api_id = 1780047
-api_hash = "35981a05b4634fc98359fb023a1c824f"
+api_id = int(os.getenv("API_ID"))
+api_hash = os.getenv("API_HASH")
+phone = os.getenv("PHONE")
 channel = -1002437817236
 
 DAILY_DELETE_LIMIT = 10
@@ -50,7 +51,7 @@ async def main():
     print(f"✅ Total deleted today: {deleted_count}")
 
 async def start():
-    await client.start()
+    await client.start(phone=phone)
     await main()
 
 asyncio.run(start())
