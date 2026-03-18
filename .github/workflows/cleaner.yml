@@ -2,7 +2,7 @@ name: Telegram Cleaner
 
 on:
   schedule:
-    - cron: '0 5 * * *'   # daily (India ~10:30 AM)
+    - cron: "0 5 * * *" # daily (India ~10:30 AM)
   workflow_dispatch:
 
 jobs:
@@ -16,10 +16,14 @@ jobs:
       - name: Install Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: Install dependencies
         run: pip install telethon
 
       - name: Run script
-        run: python cleaner_fast.py
+  env:
+    API_ID: ${{ secrets.API_ID }}
+    API_HASH: ${{ secrets.API_HASH }}
+    PHONE: ${{ secrets.PHONE }}
+  run: python cleaner_fast.py
