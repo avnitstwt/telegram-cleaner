@@ -1,0 +1,25 @@
+name: Telegram Cleaner
+
+on:
+  schedule:
+    - cron: '0 5 * * *'   # daily (India ~10:30 AM)
+  workflow_dispatch:
+
+jobs:
+  run-cleaner:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install telethon
+
+      - name: Run script
+        run: python cleaner_fast.py
